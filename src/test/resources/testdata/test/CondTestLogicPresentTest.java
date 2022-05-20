@@ -20,8 +20,8 @@ public class CondTestLogicPresentTest {
 
     @Test
     public void test2() {
-        for(int i=0;i<5;i++){
-            Assert.assertEquals(1,i);
+        for(int i=0;i<1;i++){
+            Assert.assertEquals(1,1);
         }
     }
 

@@ -13,9 +13,22 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src/main']
         }
     }
+    test {
+        java {
+            srcDirs = ['src/test']
+        }
+        // java/testSmellDetection/structuralRules/
+/*        resources {
+            srcDirs = ['src/resources']
+        }*/
+    }
+}
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+    sourceSets sourceSets.test
 }
 
 jacoco {
@@ -52,6 +65,7 @@ test {
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+    sourceSets sourceSets.test
 }
 
 intellij {

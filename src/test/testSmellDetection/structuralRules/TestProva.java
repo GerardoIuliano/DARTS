@@ -9,7 +9,7 @@ import utility.TestSmellUtilities;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class TestProva extends TestConfig{
+public class TestProva extends testSmellDetection.structuralRules.TestConfig {
 
 
     @Test
@@ -19,7 +19,7 @@ public class TestProva extends TestConfig{
             super.setFileName("CondTestLogicPresentTest.java");
             ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
             ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-            ArrayList<MethodWithCondTestLogic> smellList = CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),0);
+            ArrayList<MethodWithCondTestLogic> smellList = testSmellDetection.structuralRules.CondTestLogicStructural.checkMethodsThatCauseCondTestLogic(testClassBeans.get(0),0);
             assertEquals(3, smellList.size());
         });
     }
