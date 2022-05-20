@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class TestProva extends testSmellDetection.structuralRules.TestConfig {
 
-
     @Test
     public void test1(){
         JButton jb = new JButton();

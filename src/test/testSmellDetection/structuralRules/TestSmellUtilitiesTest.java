@@ -1,15 +1,22 @@
 package testSmellDetection.structuralRules;
 
+import com.intellij.psi.PsiClass;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
+import org.junit.jupiter.api.Test;
 import testSmellDetection.bean.PsiClassBean;
 import utility.ConverterUtilities;
 import utility.TestSmellUtilities;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 public class TestSmellUtilitiesTest extends LightJavaCodeInsightFixtureTestCase {
 
     private ArrayList<PsiClassBean> psiClassBeans;
+    private ArrayList<PsiClassBean> testClassBeans = new ArrayList<PsiClassBean>();
 
     @Override
     protected String getTestDataPath() {
@@ -23,18 +30,30 @@ public class TestSmellUtilitiesTest extends LightJavaCodeInsightFixtureTestCase 
         psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
     }
 
+    @Test
     public void testSmellUtilitiesNotNull() {
-        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        JButton jb = new JButton();
+        jb.addActionListener(actionEvent -> {
+            testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        });
         assertNotNull(testClassBeans);
     }
 
+    @Test
     public void testSmellUtilitiesIstanceOfArrayList() {
-        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        JButton jb = new JButton();
+        jb.addActionListener(actionEvent -> {
+            testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+        });
         assertInstanceOf(testClassBeans,ArrayList.class);
     }
 
+    @Test
     public void testSmellUtilitiesIstanceOfPsiClassBean() {
-        ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        assertInstanceOf(testClassBeans.get(0),PsiClassBean.class);
+        JButton jb = new JButton();
+        jb.addActionListener(actionEvent -> {
+            testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
+            assertInstanceOf(testClassBeans.get(0), PsiClassBean.class);
+        });
     }
 }
