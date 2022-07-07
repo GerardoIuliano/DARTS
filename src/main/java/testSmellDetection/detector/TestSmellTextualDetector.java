@@ -114,9 +114,6 @@ public class TestSmellTextualDetector implements IDetector{
        return null;
     }
 
-    @Override
-    public ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest() {
-        return null;
-    }
+
 
 }

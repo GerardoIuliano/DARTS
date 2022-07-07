@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public abstract class IgnoredTestStructural {
 
-    public static ArrayList<MethodWithIgnoredTest> checkMethodsThatIgnoredTest(PsiClassBean testClass) {
+    public static ArrayList<MethodWithIgnoredTest> checkMethodsThatCauseIgnoredTest(PsiClassBean testClass) {
         ArrayList<MethodWithIgnoredTest> methodWithIgnoredTests = new ArrayList<>();
         for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){
             String methodName = psiMethodBeanInside.getPsiMethod().getName();
@@ -24,12 +24,14 @@ public abstract class IgnoredTestStructural {
                     !methodName.toLowerCase().equals("teardown")) {
 
                 PsiModifierList psiModifierList = psiMethodBeanInside.getPsiMethod().getModifierList();
-
                 PsiAnnotation[] annotations = psiModifierList.getAnnotations();
 
-                if (psiModifierList.toString().contains("Ignore")){
-                    methodWithIgnoredTests.add(new MethodWithIgnoredTest(psiMethodBeanInside));
+                for(int i=0; i< annotations.length; i++){
+                    if (annotations[i].getText().equals("@Ignore")){
+                        methodWithIgnoredTests.add(new MethodWithIgnoredTest(psiMethodBeanInside));
+                    }
                 }
+
             }
         }
         if(methodWithIgnoredTests.isEmpty()){

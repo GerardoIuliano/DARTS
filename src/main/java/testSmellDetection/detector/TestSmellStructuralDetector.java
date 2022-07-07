@@ -112,21 +112,13 @@ public class TestSmellStructuralDetector implements IDetector{
     public ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo() {
         ArrayList<IgnoredTestInfo> classesWithIgnoredTest = new ArrayList<>();
         for(PsiClassBean testClass : testClasses){
-            if(testClass.getProductionClass() != null) {
-                ArrayList<MethodWithIgnoredTest> methodsWithIgnoredTest = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClass);
-                if (methodsWithIgnoredTest != null) {
-                    classesWithIgnoredTest.add(new IgnoredTestInfo(testClass, testClass.getProductionClass(), methodsWithIgnoredTest));
-                }
+            ArrayList<MethodWithIgnoredTest> methodsWithIgnoredTest = IgnoredTestStructural.checkMethodsThatCauseIgnoredTest(testClass);
+            if (methodsWithIgnoredTest != null) {
+                classesWithIgnoredTest.add(new IgnoredTestInfo(testClass, methodsWithIgnoredTest));
             }
         }
         return classesWithIgnoredTest;
     }
-
-    @Override
-    public ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest() {
-        return null;
-    }
-
 
     public ArrayList<GeneralFixtureInfo> executeDetectionForGeneralFixture() {
         ArrayList<GeneralFixtureInfo> classesWithGeneralFixture = new ArrayList<>();
@@ -138,7 +130,6 @@ public class TestSmellStructuralDetector implements IDetector{
         }
         return classesWithGeneralFixture;
     }
-
 
     public ArrayList<EagerTestInfo> executeDetectionForEagerTest() {
         ArrayList<EagerTestInfo> classesWithEagerTest = new ArrayList<>();
@@ -152,7 +143,6 @@ public class TestSmellStructuralDetector implements IDetector{
         }
         return classesWithEagerTest;
     }
-
 
     public ArrayList<LackOfCohesionInfo> executeDetectionForLackOfCohesion() {
         ArrayList<LackOfCohesionInfo> classesWithLackOfCohesion = new ArrayList<>();

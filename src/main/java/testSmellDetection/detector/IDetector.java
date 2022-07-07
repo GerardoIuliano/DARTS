@@ -31,5 +31,4 @@ public interface IDetector {
 
     ArrayList<IgnoredTestInfo> executeDetectionForIgnoredTestInfo();
 
-    ArrayList<IgnoredTestInfo> executeDetectionIgnoredTest();
 }

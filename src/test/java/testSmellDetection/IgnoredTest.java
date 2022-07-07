@@ -20,7 +20,7 @@ public class IgnoredTest extends TestConfig {
         super.setFileName("test/TestIT_Sys_0_instance.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClassBeans.get(0));
+        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatCauseIgnoredTest(testClassBeans.get(0));
         assertEquals(null, smellList);
     }
     @Test
@@ -28,7 +28,7 @@ public class IgnoredTest extends TestConfig {
         super.setFileName("test/TestIT_Sys_1_instance.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClassBeans.get(0));
+        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatCauseIgnoredTest(testClassBeans.get(0));
         assertEquals(1, smellList.size());
     }
     @Test
@@ -36,7 +36,7 @@ public class IgnoredTest extends TestConfig {
         super.setFileName("test/TestIT_Sys_2opiu_instance.java");
         ArrayList<PsiClassBean> psiClassBeans = ConverterUtilities.getClassesFromPackages(getProject());
         ArrayList<PsiClassBean> testClassBeans = TestSmellUtilities.getAllTestClasses(psiClassBeans);
-        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatIgnoredTest(testClassBeans.get(0));
+        ArrayList<MethodWithIgnoredTest> smellList = IgnoredTestStructural.checkMethodsThatCauseIgnoredTest(testClassBeans.get(0));
         assertEquals(2, smellList.size());
     }
 

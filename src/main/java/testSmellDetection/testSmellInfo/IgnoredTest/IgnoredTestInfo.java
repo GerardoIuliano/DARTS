@@ -10,12 +10,10 @@ public class IgnoredTestInfo extends TestSmellInfo {
 
 
     private static final PsiClassBean classWithIgnoredTest = null;
-    private PsiClassBean productionClass;
     private ArrayList<MethodWithIgnoredTest> methodsThatIgnoredTest;
 
-    public IgnoredTestInfo(PsiClassBean classWithIgnoredTest, PsiClassBean productionClass, ArrayList<MethodWithIgnoredTest> methodsThatCauseIgnoredTest) {
+    public IgnoredTestInfo(PsiClassBean classWithIgnoredTest, ArrayList<MethodWithIgnoredTest> methodsThatCauseIgnoredTest) {
         super(classWithIgnoredTest);
-        this.productionClass = productionClass;
         this.methodsThatIgnoredTest = methodsThatCauseIgnoredTest;
     }
 
@@ -23,21 +21,12 @@ public class IgnoredTestInfo extends TestSmellInfo {
     public String toString() {
         return "IgnoredTestInfo{" +
                 "classWithIgnoredTest=" + classWithSmell +
-                ", productionClass=" + productionClass +
                 ", methodsThatCauseLackOfCohesion=" + methodsThatIgnoredTest+
                 '}';
     }
 
     public static PsiClassBean getClassWithIgnoredTest() {
         return classWithIgnoredTest;
-    }
-
-    public PsiClassBean getProductionClass() {
-        return productionClass;
-    }
-
-    public void setProductionClass(PsiClassBean productionClass) {
-        this.productionClass = productionClass;
     }
 
     public ArrayList<MethodWithIgnoredTest> getMethodsThatIgnoredTest() {
