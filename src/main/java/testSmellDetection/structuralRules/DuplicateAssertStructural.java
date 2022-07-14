@@ -9,6 +9,7 @@ import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 public abstract class DuplicateAssertStructural {
@@ -16,6 +17,8 @@ public abstract class DuplicateAssertStructural {
     public static ArrayList<MethodWithDuplicateAssert> checkMethodsThatCauseDuplicateAssert(PsiClassBean testClass) {
         ArrayList<MethodWithDuplicateAssert> methodsWithDuplicateAsserts = new ArrayList<>();
         int counter = 0;
+        HashSet set = new HashSet();
+        ArrayList<String> names = new ArrayList<>();
         for(PsiMethodBean psiMethodBeanInside : testClass.getPsiMethodBeans()){
             String methodName = psiMethodBeanInside.getPsiMethod().getName();
             if(!methodName.equals(testClass.getPsiClass().getName()) &&
@@ -27,14 +30,22 @@ public abstract class DuplicateAssertStructural {
                         /*Prendo il nome del metodo */
                         String methodCallName = callExpression.getMethodExpression().getQualifiedName();
                         if(methodCallName.toLowerCase().contains("assert")){
+                            String firtsArg = callExpression.getArgumentList().getExpressions()[0].getText();
+                            names.add(firtsArg);
                             counter++;
                         }
                     }
                     if (counter>1){
-                        methodsWithDuplicateAsserts.add(new MethodWithDuplicateAssert(psiMethodBeanInside));
+                        for (String name : names) {
+                            if (set.add(name) == false) {
+                                methodsWithDuplicateAsserts.add(new MethodWithDuplicateAssert(psiMethodBeanInside));
+                            }
+                        }
                     }
                 }
             }
+            set.clear();
+            names.clear();
             counter=0;
         }
         if (methodsWithDuplicateAsserts.isEmpty()) {
