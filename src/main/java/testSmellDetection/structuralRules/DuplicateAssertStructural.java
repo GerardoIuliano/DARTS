@@ -1,16 +1,11 @@
 package testSmellDetection.structuralRules;
 
 import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiStatement;
 import testSmellDetection.bean.PsiClassBean;
 import testSmellDetection.bean.PsiMethodBean;
 import testSmellDetection.testSmellInfo.DuplicateAssert.MethodWithDuplicateAssert;
-import testSmellDetection.testSmellInfo.magicNamberTest.MethodWithMagicNumber;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 
 public abstract class DuplicateAssertStructural {
 
@@ -37,7 +32,7 @@ public abstract class DuplicateAssertStructural {
                     }
                     if (counter>1){
                         for (String name : names) {
-                            if (set.add(name) == false) {
+                            if (!set.add(name)) {
                                 methodsWithDuplicateAsserts.add(new MethodWithDuplicateAssert(psiMethodBeanInside));
                             }
                         }
